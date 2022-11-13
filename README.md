@@ -24,3 +24,6 @@
 
 - From the above problem statement we could observe that, we have to reduce false positives and false negatives. More importantly we have to **reduce false negatives, since cost incurred due to false negative is 50 times higher than the false positives.**
 
+## Number of Instances
+
+- The training set contains 60000 examples in total in which 59000 belong to the negative class and 1000 positive class.The test set contains 16000 examples.
