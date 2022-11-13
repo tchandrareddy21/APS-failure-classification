@@ -12,6 +12,8 @@
 
 - The problem is to reduce the cost due to unnecessary repairs. So it is required to minimize the false predictions.
 
+## Cost-metric of miss-classification
+
 | True class/ Predicted class | True class | Negative |
 |-----------------------------|------------|----------|
 | Positive                    | -          | Cost_1   |
@@ -21,3 +23,4 @@
 - `Total_cost = Cost_1 * No_Instances + Cost_2 * No_Instances.`
 
 - From the above problem statement we could observe that, we have to reduce false positives and false negatives. More importantly we have to **reduce false negatives, since cost incurred due to false negative is 50 times higher than the false positives.**
+
