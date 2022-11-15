@@ -27,3 +27,5 @@
 ## Number of Instances
 
 - The training set contains 60000 examples in total in which 59000 belong to the negative class and 1000 positive class.The test set contains 16000 examples.
+
+- It is a imbalanecd dataset
