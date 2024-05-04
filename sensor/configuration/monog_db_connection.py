@@ -8,7 +8,7 @@ class MongoDBClient:
     def __init__(self, database_name = DATABASE_NAME) -> None:
         try:
             if MongoDBClient.clinet is None:
-                mongo_db_url = "mongodb+srv://sensor-fault-detection:sEnsOr_fAult_dEtEctIOn@sensor-fault-detection.1dmjfkb.mongodb.net/?retryWrites=true&w=majority&appName=sensor-fault-detection"
+                mongo_db_url = "USE your OWN URL"
                 MongoDBClient.clinet = pymongo.MongoClient(mongo_db_url, tlsCAFile = ca)
             self.clinet = MongoDBClient.clinet
             self.database = self.clinet[database_name]
