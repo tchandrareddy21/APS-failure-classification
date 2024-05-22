@@ -11,7 +11,7 @@ class MongoDBClient:
             if MongoDBClient.clinet is None:
                 # mongo_db_url = "USE your OWN URL"
                 # MongoDBClient.clinet = pymongo.MongoClient(mongo_db_url, tlsCAFile = ca)
-                MongoDBClient.clinet = pymongo.MongoClient(os.env, tlsCAFile = ca)
+                MongoDBClient.clinet = pymongo.MongoClient(os.getenv("MONGO_DB_URL"), tlsCAFile = ca)
             self.clinet = MongoDBClient.clinet
             self.database = self.clinet[database_name]
             self.database_name = database_name
