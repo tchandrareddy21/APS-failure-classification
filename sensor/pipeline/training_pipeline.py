@@ -26,9 +26,9 @@ class TrainPipeline:
         
     def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact)-> DataValidationArtifact:
         try:
-            self.start_data_validation_config = DataValidationConfig(training_pipeline_config= self.training_pipeline_config)
+            data_validation_config = DataValidationConfig(training_pipeline_config= self.training_pipeline_config)
             data_validation = DataValidation(data_ingestion_artifact=data_ingestion_artifact,
-                                             data_validation_config=DataValidationConfig)
+                                             data_validation_config=data_validation_config)
             data_validation_artifact = data_validation.initiate_data_validation()
         except Exception as e:
             raise SensorException(e, sys)
