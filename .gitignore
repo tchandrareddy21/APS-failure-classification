@@ -136,3 +136,4 @@ dmypy.json
 credentials.yml
 /Research
 /artifact
+/notebooks/sensor.csv
