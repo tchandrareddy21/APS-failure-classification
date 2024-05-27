@@ -137,3 +137,4 @@ credentials.yml
 /Research
 /artifact
 /notebooks/sensor.csv
+/saved_models/*

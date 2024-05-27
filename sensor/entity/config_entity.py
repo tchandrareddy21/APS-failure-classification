@@ -49,4 +49,31 @@ class DataTransformationConfig:
         self.transformed_test_file_path: str = os.path.join(self.data_transformation_dir,  training_pipeline.DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR,
             training_pipeline.TEST_FILE_NAME.replace("csv", "npy"), )
         self.transformed_object_file_path: str = os.path.join( self.data_transformation_dir, training_pipeline.DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR,
-            training_pipeline.PREPROCESSING_OBJECT_FILE_NAME,)
+            training_pipeline.PREPROCESSING_OBJECT_FILE_NAME)
+        
+
+class ModelTrainerConfig:
+     def __init__(self, training_pipeline_config: TrainingPipelineConfig):
+          self.model_trainer_dir: str = os.path.join(
+               training_pipeline_config.artifact_dir, training_pipeline.MODEL_TARINER_DIR_NAME
+          )
+          self.trained_model_fie_path: str = os.path.join(
+               self.model_trainer_dir, training_pipeline.MODEL_TARINER_TRAINED_MODEL_DIR,
+               training_pipeline.MODEL_FILE_NAME
+          )
+          self.expected_accuracy: float = training_pipeline.MODEL_TARINER_EXCEPTED_SCORE
+          self.overfitting_underfitting_threshold: float = training_pipeline.MODEL_TARINER_OVER_FITTING_UNDER_FITTING_THRESHOLD
+
+class ModelEvaluationConfig:
+     def __init__(self, training_pipeline_config: TrainingPipelineConfig):
+          self.model_evaluation_dir: str = os.path.join(training_pipeline_config.artifact_dir, training_pipeline.MODEL_EVALUATION_DIR_NAME)
+          self.report_file_path: str = os.path.join(self.model_evaluation_dir, training_pipeline.MODEL_EVALUATION_DIR_NAME)
+          self.changed_threshold: str = training_pipeline.MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE
+
+
+class ModelPusherConfig:
+     def __init__(self, training_pipeline_config: TrainingPipelineConfig):
+          self.model_evaluation_dir: str = os.path.join(training_pipeline_config.artifact_dir, training_pipeline.MODEL_PUSHER_DIR_NAME)
+          self.model_file_path: str = os.path.join(self.model_evaluation_dir, training_pipeline.MODEL_FILE_NAME)
+          timestamp = round(datetime.now().timestamp())
+          self.saved_model_path = os.path.join(training_pipeline.SAVED_MODEL_DIR, f"{timestamp}", training_pipeline.MODEL_FILE_NAME)
