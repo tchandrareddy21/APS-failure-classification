@@ -1,2 +1,2 @@
-TRAINING_BUCKET_NAME = "sensor-model-artifacts"
+TRAINING_BUCKET_NAME = "scania-sensor-artifacts"
 PREDICTION_BUCKET_NAME = "sensor-datasource"
