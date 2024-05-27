@@ -64,7 +64,7 @@ class DataTransformation:
             raise SensorException(e, sys) from e
 
     
-    def initiate_data_transformation(self,) -> DataTransformationArtifact:
+    def initiate_data_transformation(self) -> DataTransformationArtifact:
         try:
             
             train_df = DataTransformation.read_data(self.data_validation_artifact.valid_train_file_path)
