@@ -4,8 +4,13 @@ import os
 import certifi
 ca = certifi.where()
 
+from dotenv import load_dotenv, find_dotenv
+
+_ = load_dotenv(find_dotenv())
+
 class MongoDBClient:
     clinet = None
+
     def __init__(self, database_name = DATABASE_NAME) -> None:
         try:
             if MongoDBClient.clinet is None:
