@@ -75,12 +75,14 @@ class DataTransformation:
             #training dataframe
             input_feature_train_df = train_df.drop(columns=[TARGET_COLUMN], axis=1)
             target_feature_train_df = train_df[TARGET_COLUMN]
-            target_feature_train_df = target_feature_train_df.replace( TargetValueMapping().to_dict())
+            target_feature_train_df = target_feature_train_df.replace(TargetValueMapping().to_dict())
+            target_feature_train_df = np.array(target_feature_train_df).astype(int)
 
             #testing dataframe
             input_feature_test_df = test_df.drop(columns=[TARGET_COLUMN], axis=1)
             target_feature_test_df = test_df[TARGET_COLUMN]
             target_feature_test_df = target_feature_test_df.replace(TargetValueMapping().to_dict())
+            target_feature_test_df = np.array(target_feature_test_df).astype(int)
 
             preprocessor_object = preprocessor.fit(input_feature_train_df)
             transformed_input_train_feature = preprocessor_object.transform(input_feature_train_df)
@@ -89,20 +91,22 @@ class DataTransformation:
             smt = SMOTETomek(sampling_strategy="minority")
 
             input_feature_train_final, target_feature_train_final = smt.fit_resample(
-                transformed_input_train_feature, target_feature_train_df
+                transformed_input_train_feature,
+                target_feature_train_df
             )
 
             input_feature_test_final, target_feature_test_final = smt.fit_resample(
-                transformed_input_test_feature, target_feature_test_df
+                transformed_input_test_feature,
+                target_feature_test_df
             )
 
             train_arr = np.c_[input_feature_train_final, np.array(target_feature_train_final) ]
             test_arr = np.c_[ input_feature_test_final, np.array(target_feature_test_final) ]
 
             #save numpy array data
-            save_numpy_array_data( self.data_transformation_config.transformed_train_file_path, array=train_arr, )
-            save_numpy_array_data( self.data_transformation_config.transformed_test_file_path,array=test_arr,)
-            save_object( self.data_transformation_config.transformed_object_file_path, preprocessor_object,)
+            save_numpy_array_data(self.data_transformation_config.transformed_train_file_path, array=train_arr)
+            save_numpy_array_data(self.data_transformation_config.transformed_test_file_path,array=test_arr)
+            save_object(self.data_transformation_config.transformed_object_file_path, preprocessor_object)
             
             
             #preparing artifact
