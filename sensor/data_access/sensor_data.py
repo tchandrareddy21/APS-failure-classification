@@ -2,7 +2,7 @@ import sys
 from typing import Optional
 import numpy as np
 import pandas as pd
-from sensor.configuration.monog_db_connection import MongoDBClient
+from sensor.configuration.monogo_db_connection import MongoDBClient
 from sensor.constants.database import DATABASE_NAME
 from sensor.exception import SensorException
 
@@ -32,7 +32,8 @@ class SensorData:
 
             if "_id" in df.columns.to_list():
                 df = df.drop(columns=["_id"], axis = 1)
-            
+
+            pd.set_option('future.no_silent_downcasting', True)
             df.replace({"na": np.nan}, inplace= True)
 
             return df
