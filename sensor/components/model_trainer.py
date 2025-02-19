@@ -18,7 +18,7 @@ class ModelTrainer:
         except Exception as e:
             raise SensorException(e, sys)
         
-    def perform_hyper_parameter_tunig(self):...
+    def perform_hyperparameter_tuning(self):...
 
 
     def train_model(self, x_train, y_train):
@@ -60,7 +60,7 @@ class ModelTrainer:
             diff = abs(classification_train_metric.f1_score - classification_test_metric.f1_score)
 
             if diff > self.model_trainer_config.overfitting_underfitting_threshold:
-                raise Exception("Model is not good try to do more experimentaion")
+                raise Exception("Model is not good try to do more experimentation")
             
             preprocessor = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
 
@@ -72,7 +72,7 @@ class ModelTrainer:
             # Model Trainer Artifact
             model_trainer_artifact = ModelTrainerArtifact(trained_model_file_path=self.model_trainer_config.trained_model_fie_path,
                                                           train_metric_artifact= classification_train_metric,
-                                                          test_metric_artifcat= classification_test_metric)
+                                                          test_metric_artifact= classification_test_metric)
             logging.info(f"Model trainer Artifact: {model_trainer_artifact}")
             return model_trainer_artifact
         except Exception as e:

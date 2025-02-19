@@ -38,7 +38,7 @@ class TrainPipeline:
             logging.info(f"Starting data ingestion")
             data_ingestion = DataIngestion(data_ingestion_config=self.data_ingestion_config)
             data_ingestion_artifact = data_ingestion.initiate_data_ingestion()
-            logging.info(f"Data ingestion completd and artifact: {data_ingestion_artifact}")
+            logging.info(f"Data ingestion completed and artifact: {data_ingestion_artifact}")
             return data_ingestion_artifact
         except Exception as e:
             raise SensorException(e, sys)
@@ -56,9 +56,9 @@ class TrainPipeline:
     def start_data_transformation(self, data_validation_artifact: DataValidationArtifact):
         try:
             data_transformation_config = DataTransformationConfig(training_pipeline_config=self.training_pipeline_config)
-            data_tranformation = DataTransformation(data_validation_artifact=data_validation_artifact,
+            data_transformation = DataTransformation(data_validation_artifact=data_validation_artifact,
                                                     data_transformation_config = data_transformation_config)
-            data_transformation_artifact = data_tranformation.initiate_data_transformation()
+            data_transformation_artifact = data_transformation.initiate_data_transformation()
             return data_transformation_artifact
         except Exception as e:
             raise SensorException(e, sys)
@@ -117,10 +117,10 @@ class TrainPipeline:
             if not model_eval_artifact.is_model_accepted:
                 raise Exception("Trained model is not better than the best model")
             model_pusher_artifact = self.start_model_pusher(model_eval_artifact)
-            TrainPipeline.is_pipeline_runnung = False
-            self.sync_artifact_dir_to_s3()
-            self.sync_saved_model_dir_to_s3()
+            # TrainPipeline.is_pipeline_running = False
+            # self.sync_artifact_dir_to_s3()
+            # self.sync_saved_model_dir_to_s3()
         except Exception as e:
             self.sync_saved_model_dir_to_s3()
-            TrainPipeline.is_pipeline_runnung = False
+            TrainPipeline.is_pipeline_running = False
             raise SensorException(e, sys)

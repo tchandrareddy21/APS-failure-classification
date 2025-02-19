@@ -3,6 +3,7 @@ from sensor.logger import logging
 import yaml
 import sys, os, dill
 import numpy as np
+from typing import Any
 
 def read_yaml_file(file_path: str) -> dict:
     try:
@@ -12,7 +13,7 @@ def read_yaml_file(file_path: str) -> dict:
         raise SensorException(e, sys) from e
     
 
-def write_yaml_file(filepath: str, content: object, replace: bool = False)-> None:
+def write_yaml_file(filepath: str, content: object, replace: bool = False)-> str:
     try:
         if replace:
             if os.path.exists(filepath):
@@ -20,6 +21,7 @@ def write_yaml_file(filepath: str, content: object, replace: bool = False)-> Non
         os.makedirs(os.path.dirname(filepath), exist_ok= True)
         with open(filepath, "w") as file:
             yaml.dump(content, file)
+        return "Success"
     except Exception as e:
         raise SensorException(e, sys) from e
     
@@ -63,7 +65,7 @@ def save_object(file_path: str, obj: object) -> None:
         raise SensorException(e, sys) from e
 
 
-def load_object(file_path: str, ) -> object:
+def load_object(file_path: str, ) -> Any:
     try:
         if not os.path.exists(file_path):
             raise Exception(f"The file: {file_path} is not exists")

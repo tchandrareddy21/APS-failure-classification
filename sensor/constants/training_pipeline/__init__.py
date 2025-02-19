@@ -4,7 +4,7 @@ from sensor.constants.s3_bucket import TRAINING_BUCKET_NAME
 SAVED_MODEL_DIR =os.path.join("saved_models")
 
 """
-Defining common constant varibles for training pipeline
+Defining common constant variables for training pipeline
 """
 TARGET_COLUMN = "class"
 PIPELINE_NAME: str = "sensor"
@@ -30,7 +30,7 @@ DATA_INGESTION_INGESTED_DIR: str = "ingested"
 DATA_INGESTION_TRAIN_TEST_SPLIT_RATION: float = 0.2
 
 """
-Data Validation realted contant start with DATA_VALIDATION VAR NAME
+Data Validation related constant start with DATA_VALIDATION VAR NAME
 """
 DATA_VALIDATION_DIR_NAME: str = "data_validation"
 DATA_VALIDATION_VALID_DIR: str = "validated"
@@ -40,7 +40,7 @@ DATA_VALIDATION_DRIFT_REPORT_FILE_NAME: str = "report.yaml"
 
 
 """
-Data Transformation ralated constant start with DATA_TRANSFORMATION VAR NAME
+Data Transformation related constant start with DATA_TRANSFORMATION VAR NAME
 """
 DATA_TRANSFORMATION_DIR_NAME: str = "data_transformation"
 DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR: str = "transformed"
@@ -49,11 +49,11 @@ DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR: str = "transformed_object"
 """
 Model Trainer related constant start with MODEL_TRAINER VAR NAME
 """
-MODEL_TARINER_DIR_NAME: str = "model_trainer"
-MODEL_TARINER_TRAINED_MODEL_DIR: str = "trained_model"
-MODEL_TARINER_TRAINED_MODEL_NAME: str = "model.pkl"
-MODEL_TARINER_EXCEPTED_SCORE: float = 0.6
-MODEL_TARINER_OVER_FITTING_UNDER_FITTING_THRESHOLD: float = 0.05
+MODEL_TRAINER_DIR_NAME: str = "model_trainer"
+MODEL_TRAINER_TRAINED_MODEL_DIR: str = "trained_model"
+MODEL_TRAINER_TRAINED_MODEL_NAME: str = "model.pkl"
+MODEL_TRAINER_EXCEPTED_SCORE: float = 0.6
+MODEL_TRAINER_OVER_FITTING_UNDER_FITTING_THRESHOLD: float = 0.05
 
 
 """
@@ -64,7 +64,7 @@ MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
 MODEL_EVALUATION_REPORT_NAME: str = "report.yaml"
 
 """
-MODEL Pusher related constant stsrt with MODEL_PUSHER VAR NAME
+MODEL Pusher related constant start with MODEL_PUSHER VAR NAME
 """
 MODEL_PUSHER_DIR_NAME: str = "model_pusher"
 MODEL_PUSHER_SAVED_MODEL_DIR: str = SAVED_MODEL_DIR
