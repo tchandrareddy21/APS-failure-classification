@@ -1,6 +1,6 @@
 import os
 
-class s3Sync:
+class S3Sync:
 
     def sync_folder_to_s3(self, folder, aws_bucket_url):
         command = f"Aws s3 sync {folder} {aws_bucket_url}"

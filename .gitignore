@@ -135,9 +135,10 @@ dmypy.json
 # scerts
 credentials.yml
 /Research
-/artifact
+/artifact/
 /notebooks/sensor.csv
 saved_models/*
 logs/*
 test.ipynb
 test.py
+/logs/
