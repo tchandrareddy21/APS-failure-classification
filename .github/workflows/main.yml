@@ -102,14 +102,15 @@ jobs:
 #        run: |
 #         docker ps -q --filter "name=sensor" | grep -q . && docker stop sensor && docker rm -fv sensor
 
-      - name: Stop and remove sensor container if running
+      - name: Stop and remove sensor container if running or stopped
         run: |
-          CONTAINER_ID=$(docker ps -q --filter "name=sensor")
+          CONTAINER_ID=$(docker ps -aq --filter "name=sensor")  # Check all containers (running or stopped)
           if [ -n "$CONTAINER_ID" ]; then
             echo "Stopping and removing container: sensor"
-            docker stop sensor && docker rm -fv sensor
+            docker stop sensor || true  # Stop only if it's running
+            docker rm -fv sensor  # Remove the container
           else
-            echo "No running container found with name: sensor"
+            echo "No existing container found with name: sensor"
           fi
       
 
