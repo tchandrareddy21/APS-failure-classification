@@ -120,10 +120,16 @@ class TrainPipeline:
                 raise Exception("Trained model is not better than the best model")
             model_pusher_artifact = self.start_model_pusher(model_eval_artifact)
             TrainPipeline.is_pipeline_running = False
+            logging.info("Artifacts syncing to S3 started.")
             self.sync_artifact_dir_to_s3()
+            logging.info("Artifacts syncing to S3 completed.")
+            logging.info("model syncing to S3 started.")
             self.sync_saved_model_dir_to_s3()
+            logging.info("model syncing to S3 completed.")
         except Exception as e:
             # If any exception is got in middle, we are syncing files created till then
+            logging.info("model syncing to S3 started.")
             self.sync_saved_model_dir_to_s3()
+            logging.info("model syncing to S3 completed.")
             TrainPipeline.is_pipeline_running = False
             raise SensorException(e, sys)
