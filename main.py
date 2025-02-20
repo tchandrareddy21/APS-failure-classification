@@ -1,17 +1,12 @@
-from sensor.configuration.monogo_db_connection import MongoDBClient
-from sensor.exception import SensorException
-import os,sys
-from sensor.logger import logging
-from sensor.pipeline import training_pipeline
+from urllib.request import Request
 from sensor.pipeline.training_pipeline import TrainPipeline
-import os
-from sensor.utils.main_utils import read_yaml_file
 from sensor.constants.training_pipeline import SAVED_MODEL_DIR
 from fastapi import FastAPI, File, UploadFile
 from sensor.constants.application import APP_HOST, APP_PORT
 from starlette.responses import RedirectResponse
 from uvicorn import run as app_run
 from fastapi.responses import Response
+from fastapi import HTTPException
 from sensor.ml.model.estimator import ModelResolver,TargetValueMapping
 from sensor.utils.main_utils import load_object
 from fastapi.middleware.cors import CORSMiddleware
@@ -80,7 +75,7 @@ async def predict_route(request:Request,file: UploadFile = File(...)):
         #decide how to return file to user.
         
     except Exception as e:
-        raise Response(f"Error Occured! {e}")
+        raise HTTPException(status_code=400, detail=f"Error occurred! {e}")
 
 # def main():
 #     try:
