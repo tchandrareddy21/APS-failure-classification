@@ -6,3 +6,5 @@ flowcharts
 notebooks
 .git
 aps_failure_training_set1.csv
+/logs/
+.env
