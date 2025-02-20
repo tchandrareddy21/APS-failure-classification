@@ -19,13 +19,18 @@ import os
 import pandas as pd
 
 
-env_file_path=os.path.join(os.getcwd(),"env.yaml")
 
-def set_env_variable(env_file_path):
-
+def set_env_variable():
+    from dotenv import load_dotenv, find_dotenv
+    _ = load_dotenv(find_dotenv())
     if os.getenv('MONGO_DB_URL',None) is None:
-        env_config = read_yaml_file(env_file_path)
-        os.environ['MONGO_DB_URL']=env_config['MONGO_DB_URL']
+        os.environ['MONGO_DB_URL']=os.getenv('MONGO_DB_URL')
+    if os.getenv('AWS_ACCESS_KEY_ID_ENV_KEY',None) is None:
+        os.environ['AWS_ACCESS_KEY_ID_ENV_KEY'] = os.getenv('AWS_ACCESS_KEY_ID_ENV_KEY')
+    if os.getenv('AWS_SECRET_ACCESS_ENV_KEY',None) is None:
+        os.environ['AWS_SECRET_ACCESS_ENV_KEY'] = os.getenv('AWS_SECRET_ACCESS_ENV_KEY')
+    if os.getenv('AWS_REGION_NAME',None) is None:
+        os.environ['AWS_REGION_NAME'] = os.getenv('AWS_REGION_NAME')
 
 
 app = FastAPI()
