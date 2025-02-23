@@ -1,4 +1,4 @@
-# Sensor-Fault-Detection
+<h1 align="center">APS Failure Detection</h1>
 
 ## Project Overview
 
@@ -204,8 +204,9 @@ newgrp docker
    MONGO_DB_URL
    ```
 7. Now go to do any changes(other than README.md) in the repository code and push it. It will start the workflow.
-8. Now go to EC2 dashboard and open public DNS url and then remove **_`s`_** from **`https`** 
-9. In the UI shown select the train route to train the model or predict route to predict the route
+8. Now go to EC2 dashboard and open public DNS url and then remove **_`s`_** from **`https`** then url may lokk like similir to below one.
    ```pycon
    http://ec2-3-93-46-151.compute-1.amazonaws.com/
    ```
+10. In the UI shown select the train route to train the model or predict route to predict the route
+   
