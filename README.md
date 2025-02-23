@@ -86,13 +86,13 @@ MONGODB_URL=""
 ```pycon
 python app.py
 ```
-- To train the model
+- To train the model use train route
 ```pycon
-http://localhost:8080/train 
+http://localhost:8080 
 ```
-- To predict on new data
+- To predict on new data use predict route
 ```pycon
-http://localhost:8080/predict
+http://localhost:8080
 ```
 
 ### Running the app using Docker
@@ -204,12 +204,8 @@ newgrp docker
    MONGO_DB_URL
    ```
 7. Now go to do any changes(other than README.md) in the repository code and push it. It will start the workflow.
-8. Now go to EC2 dashboard and open public DNS url and then remove **_`s`_** from **`https`** and add port number at the end of the url i.e. :8080
-9. Add /train in the url, if you to train the model.
+8. Now go to EC2 dashboard and open public DNS url and then remove **_`s`_** from **`https`** 
+9. In the UI shown select the train route to train the model or predict route to predict the route
    ```pycon
-   url:8080/train
-   ```
-10. For prediction use the following url
-   ```pycon
-   url:8501
+   http://ec2-3-93-46-151.compute-1.amazonaws.com/
    ```
