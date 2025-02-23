@@ -6,6 +6,11 @@ on:
       - main
     paths-ignore:
       - 'README.md'
+      - 'flowcharts/**'
+      - 'notebooks/**'
+      - '.gitignore'
+      - 'runtime.txt'
+      - 'LICENSE'
 
 permissions:
   id-token: write
