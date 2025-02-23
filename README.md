@@ -43,12 +43,10 @@
 4. GitHub Actions
 
 ## Architectures
-### Data Collection
-
 ### Project Architecture
-
+![APS Failure Classification High Level Code Flow](flowcharts/APS%20Failure%20Classification%20High%20Level%20Code%20Flow.png)
 ### Deployment Architecture
-
+![Deployment Architecture](flowcharts/Deployment%20Architecture.png)
 ## How to run?
 
 ### Running the app locally using GitHub repository
