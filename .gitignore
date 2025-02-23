@@ -142,3 +142,5 @@ logs/*
 test.ipynb
 test.py
 /logs/
+/notebooks/aps_failure_training_set1.csv
+/predictions/

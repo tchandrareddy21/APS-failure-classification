@@ -66,7 +66,7 @@ class ModelEvaluation:
                 is_model_accepted = True
             else:
                 is_model_accepted = False
-            logging.info("Test log.")
+
             model_evaluation_artifact = ModelEvaluationArtifact(
                 is_model_accepted= is_model_accepted,
                 improved_accuracy= improved_accuracy,

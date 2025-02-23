@@ -104,7 +104,7 @@ class TrainPipeline:
     def sync_saved_model_dir_to_s3(self):
         try:
             aws_bucket_url = f"s3://{TRAINING_BUCKET_NAME}/{SAVED_MODEL_DIR}"
-            self.s3_sync.sync_folder_from_s3(folder= SAVED_MODEL_DIR, aws_bucket_url= aws_bucket_url)
+            self.s3_sync.sync_folder_to_s3(folder= SAVED_MODEL_DIR, aws_bucket_url= aws_bucket_url)
         except Exception as e:
             raise SensorException(e, sys)
         
@@ -112,6 +112,7 @@ class TrainPipeline:
     def run_pipeline(self):
         try:
             TrainPipeline.is_pipeline_running = True
+            logging.info(f"======"*10)
             data_ingestion_artifact: DataIngestionArtifact = self.start_data_ingestion()
             data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
             data_transformation_artifact = self.start_data_transformation(data_validation_artifact=data_validation_artifact)
@@ -129,8 +130,8 @@ class TrainPipeline:
             logging.info("model syncing to S3 completed.")
         except Exception as e:
             # If any exception is got in middle, we are syncing files created till then
-            logging.info("model syncing to S3 started.")
-            self.sync_saved_model_dir_to_s3()
-            logging.info("model syncing to S3 completed.")
+            logging.info(f"Artifacts syncing to S3 started with error: {e}")
+            self.sync_artifact_dir_to_s3()
+            logging.info("Artifacts syncing to S3 completed.")
             TrainPipeline.is_pipeline_running = False
             raise SensorException(e, sys)
