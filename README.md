@@ -1,4 +1,4 @@
-# Sensor-Fault-Detection
+<h1 align="center">APS Failure Detection</h1>
 
 ## Project Overview
 
