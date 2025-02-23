@@ -92,19 +92,19 @@ jobs:
 
       - name: Stop and remove sensor container if running or stopped
         run: |
-          CONTAINER_ID=$(docker ps -aq --filter "name=sensor")  # Check all containers (running or stopped)
+          CONTAINER_ID=$(docker ps -aq --filter "name=aps-failure-classification")  # Check all containers (running or stopped)
           if [ -n "$CONTAINER_ID" ]; then
-            echo "Stopping and removing container: sensor"
+            echo "Stopping and removing container: aps-failure-classification"
             docker stop $CONTAINER_ID || true  
             docker rm -fv $CONTAINER_ID  
           else
-            echo "No existing container found with name: sensor"
+            echo "No existing container found with name: aps-failure-classification"
           fi
       
 
       - name: Run Docker Image to serve users
         run: |
-         SENSOR_CONTAINER_NAME="sensor-$(date +%s)"
+         SENSOR_CONTAINER_NAME="aps-failure-classification-$(date +%s)"
          docker run -d -p 80:8080 --name=$SENSOR_CONTAINER_NAME \
          -e 'MONGO_DB_URL=${{ secrets.MONGO_DB_URL }}' \
          -e 'AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}' \

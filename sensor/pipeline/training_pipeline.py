@@ -27,6 +27,7 @@ from sensor.constants.training_pipeline import SAVED_MODEL_DIR
 class TrainPipeline:
     is_pipeline_running = False
     def __init__(self):
+        self.data_ingestion_config = None
         self.training_pipeline_config = TrainingPipelineConfig()
         self.s3_sync = S3Sync()
         # self.training_pipeline_config = training_pipeline_config

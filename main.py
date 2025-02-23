@@ -1,11 +1,13 @@
 from fastapi import FastAPI, File, UploadFile, Request, HTTPException
-from starlette.responses import RedirectResponse
-from fastapi.responses import Response
+from starlette.responses import RedirectResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.responses import RedirectResponse
 import uvicorn
-import os
 import pandas as pd
 from dotenv import load_dotenv
+from fastapi.responses import JSONResponse
+import os
+import datetime
 
 # Sensor-related imports
 from sensor.pipeline.training_pipeline import TrainPipeline
@@ -49,23 +51,47 @@ async def train_route():
         return Response(f"Error Occurred! {e}")
 
 
-@app.get("/predict")
+# Directory to save predictions
+PREDICTIONS_DIR = "predictions"
+os.makedirs(PREDICTIONS_DIR, exist_ok=True)
+
+@app.post("/predict")
 async def predict_route(file: UploadFile = File(...)):
     try:
         df = pd.read_csv(file.file)
+
+        # Load trained Model
         model_resolver = ModelResolver(model_dir=SAVED_MODEL_DIR)
         if not model_resolver.is_model_exists():
-            return Response("Model is not available")
+            return JSONResponse(content={"error": "Model is not available"}, status_code=400)
 
         best_model_path = model_resolver.get_best_model_path()
-        model = load_object(file_path=best_model_path)
-        y_pred = model.predict(df)
-        df['predicted_column'] = y_pred
-        df['predicted_column'].replace(TargetValueMapping().reverse_mapping(), inplace=True)
-        return df.to_html()
+        sensor_model = load_object(file_path=best_model_path)  # Load Model object
+
+        # Extract preprocessor from SensorModel
+        preprocessor = sensor_model.preprocessor
+        expected_features = preprocessor.get_feature_names_out()
+
+        # Validate & preprocess input data
+        df = df[expected_features]
+        df.replace("na", float("nan"), inplace=True)
+        transformed_data = preprocessor.transform(df)
+
+        # Make predictions
+        y_pred = sensor_model.model.predict(transformed_data)
+        df["predicted_column"] = y_pred
+        df["predicted_column"] = df["predicted_column"].replace(TargetValueMapping().reverse_mapping())
+
+        # Save predictions with timestamp
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"predictions_{timestamp}.csv"
+        file_path = os.path.join(PREDICTIONS_DIR, filename)
+        df.to_csv(file_path, index=False)
+
+        return JSONResponse(content={"file_path": file_path})
 
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error occurred! {e}")
+        return JSONResponse(content={"error": str(e)}, status_code=400)
 
 
 if __name__ == "__main__":

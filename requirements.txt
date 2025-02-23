@@ -17,5 +17,7 @@ types-s3transfer==0.11.2
 uvicorn==0.34.0
 starlette==0.45.3
 python-multipart==0.0.20
+streamlit==1.42.2
+requests==2.32.3
 
 -e .
