@@ -25,6 +25,8 @@
 
 #### Number of Instances
 
+[Dataset Link](https://www.kaggle.com/datasets/uciml/aps-failure-at-scania-trucks-data-set)
+
 - The training set contains 60000 examples in total in which 59000 belong to the negative class and 1000 positive class. The test set contains 16000 examples.
 - Number of Attributes: 171
 - It is an **imbalanced** dataset
