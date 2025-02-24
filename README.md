@@ -1,4 +1,4 @@
-<h1 align="center">APS Failure Detection</h1>
+<h1 align="center">APS Failure Classification</h1>
 
 ## Project Overview
 
