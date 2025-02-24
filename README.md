@@ -123,6 +123,8 @@ http://localhost:8080/train
 http://localhost:8080/predict
 ```
 
+[Deployement Screenshots PPT for reference](https://docs.google.com/presentation/d/e/2PACX-1vQ5MLOAUhE6n4EXVQXxwMnJL2lTBNekVSFqYhj5PBYdo9aN36ZvTlcynu8Xbuv_0bUYYzuKKcehweP3/pub?start=false&loop=false&delayms=3000)
+
 ### To deploy the project to cloud (AWS Account is needed)
 #### Step 1: Create an AWS account and then login to your account
 #### Step 2: You can use your root account or create a new account by using AWS Identity and Access Management (IAM) service (Best create an IAM user).
